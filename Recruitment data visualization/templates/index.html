@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>招聘信息可视化主页</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #17a2b8;
+            padding: 10px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #17a2b8;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background-color: #138496;
+            color: #fff;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+
+        .module {
+            flex-basis: 25%;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .module img {
+            margin-right: 10px; /* 图片和文字之间的间距 */
+        }
+        span {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>招聘信息可视化</h1>
+        <p>该网页用于分析招聘信息之间的数据规律</p>
+    </div>
+    <div class="navbar">
+        <div class="nav-container">
+            <!-- 导航栏内容 -->
+            <a class="nav-btn" href="/salary">薪资模块</a>
+            <a class="nav-btn" href="/region">地区模块</a>
+            <a class="nav-btn" href="/exp_edu">学历经验模块</a>
+            <a class="nav-btn" href="/company">公司模块</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="module">
+            <img src="salary-icon.png" alt="薪资模块图标" width="44" height="38.19">
+            <span> 薪资模块 </span>
+            <p>分析和可视化不同职位的薪资水平</p>
+            <a class="nav-btn" href="/salary">查看详情</a>
+        </div>
+        <div class="module">
+            <img src="region-icon.png" alt="地区模块图标" width="44" height="38.19">
+            <span>地区模块</span>
+            <p>分析和可视化招聘信息在不同地区的分布情况</p>
+            <a class="nav-btn" href="/region">查看详情</a>
+        </div>
+        <div class="module">
+            <img src="exp_edu-icon.png" alt="学历经验模块图标" width="44" height="38.19">
+            <span>学历经验模块</span>
+            <p>分析和可视化不同学历和工作经验要求的招聘信息</p>
+            <a class="nav-btn" href="/exp_edu">查看详情</a>
+        </div>
+        <div class="module">
+            <img src="company-icon.png" alt="公司模块图标" width="44" height="38.19">
+            <span>公司模块</span>
+            <p>分析和可视化招聘信息中的公司相关数据</p>
+            <a class="nav-btn" href="/company">查看详情</a>
+        </div>
+    </div>
+    <div class="footer">
+        <p>版权所有 &copy; 2023 个人面试专属</p>
+    </div>
+</body>
+</html>

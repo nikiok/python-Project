@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="../static/js/echarts.min.js"> </script>
+    <title>招聘数据可视化</title>
+    <style>
+        .header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+        .nav-bar {
+            background-color: #17a2b8;
+            padding: 10px;
+        }
+        .nav-btn {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #17a2b8;
+            text-decoration: none;
+        }
+        .nav-btn:hover {
+            background-color: #138496;
+            color: #fff;
+        }
+        /* 图表区域样式 */
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .chart {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+    </div>
+    <div class="nav-bar">
+        <a class="nav-btn" href="/salary">薪资模块</a>
+        <a class="nav-btn" href="/region">地区模块</a>
+        <a class="nav-btn" href="/exp_edu">学历经验模块</a>
+        <a class="nav-btn" href="/company">公司模块</a>
+    </div>
+    <h2>薪水模块</h2>
+    <div class="chart-container">
+            <div class="chart">
+                <div id="chart1" style="height: 400px; border: 1px solid #ccc; border-radius: 5px;padding: 10px; margin-bottom: 30px;"></div>
+            </div>
+            <div class="chart">
+                <div id="chart2" style="height: 400px; border: 1px solid #ccc; border-radius: 5px;padding: 10px; margin-bottom: 30px;"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // 从后端获取数据
+        var data1 = JSON.parse('{{ data1 | tojson | safe }}');
+
+        // 提取行业领域和平均薪水
+        var industries = data1.map(function(item) {
+            return item[0];
+        });
+        var salaries1 = data1.map(function(item) {
+            return item[1];
+        });
+
+        // 使用Echarts绘制图表1
+        var chart1 = echarts.init(document.getElementById('chart1'));
+        var options1 = {
+            title: {
+                text: '行业领域与平均薪水'
+            },
+            xAxis: {
+                type: 'category',
+                data: industries,
+                axisLabel: {
+                   rotate: 45 // 设置x轴标签倾斜角度为45度
+               }
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: salaries1,
+                type: 'bar',
+                color: '#336699'
+            }]
+        };
+        chart1.setOption(options1);
+
+
+        var data2 = JSON.parse('{{ data2 | tojson | safe }}');
+        // 提取薪水等级和分布数量
+        var levels = data2.map(function(item) {
+            return item[0];
+        });
+        var distribution = data2.map(function(item) {
+            return {
+                value: item[1],
+                name: item[0]
+            };
+        });
+
+        // 使用Echarts2绘制饼图
+
+        // 使用Echarts绘制饼图
+        var chart2 = echarts.init(document.getElementById('chart2'));
+        var options2 = {
+            title: {
+                text: '薪水等级分布'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'right',
+                data: levels
+            },
+            color: ['#3398DB', '#66CCFF', '#336699'],
+            series: [
+                {
+                    name: '薪水等级',
+                    type: 'pie',
+                    radius: ['30%', '70%'],  // 设置环形饼状图， 第一个百分数设置内圈大小，第二个百分数设置外圈大小
+                    center: ['50%', '50%'],  // 设置饼状图位置，第一个百分数调水平位置，第二个百分数调垂直位置
+                    data: distribution,
+                    label: {
+                        show: true,
+                        formatter: '{b}: {d}%'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '14',
+                            fontWeight: 'bold'
+                        },
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        chart2.setOption(options2);
+    </script>
+
+    <div class="footer">
+        <p>版权所有 &copy; 2023 招聘网</p>
+    </div>
+</body>
+</html>
